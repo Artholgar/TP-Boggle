@@ -12,7 +12,6 @@
 
 int main(int argc, char ** argv){
     ArbreLexi arbre;
-    char c;
 
     arbre = NULL;
 
@@ -30,7 +29,7 @@ int main(int argc, char ** argv){
 
     range_dans_arbre(&arbre, "tortanks");*/
     
-    afficher_dico(arbre);
+    printf("%d\n", est_dans_arbre(arbre, "dab"));
 
     
     

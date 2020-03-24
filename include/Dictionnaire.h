@@ -45,4 +45,6 @@ int range_mot(ArbreLexi * arbre, char * source);
 
 void afficher_dico(ArbreLexi arbre);
 
+int est_dans_arbre(ArbreLexi arbre, char * mot);
+
 #endif

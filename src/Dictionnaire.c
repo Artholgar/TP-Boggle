@@ -53,7 +53,7 @@ int range_mot(ArbreLexi * arbre, char * source){
 		return 0;
 	}
 
-	fichier = fopen(source, "r+");
+	fichier = fopen(source, "r");
 
 	if(fichier == NULL) {
 		printf("Erreur : Fichier introuvable\n");
@@ -112,4 +112,26 @@ void afficher_dico(ArbreLexi arbre){
 	printf("%c", arbre->lettre);
 	afficher_dico(arbre->fils);
 	afficher_dico(arbre->fd);
+}
+
+int est_dans_arbre(ArbreLexi arbre, char * mot){
+
+	if(arbre == NULL){
+		return 0;
+	}
+
+	if(mot[0] == '\0'){
+		if(arbre->lettre == '\0'){
+			return 1;
+		}
+		return 0;
+	}
+
+	if(arbre->lettre > mot[0]){
+		return est_dans_arbre(arbre->fg, mot);
+	}else if(arbre->lettre < mot[0]){
+		return est_dans_arbre(arbre->fd, mot);
+	}else{
+		return est_dans_arbre(arbre->fils, mot + 1);
+	}
 }
