@@ -8,25 +8,6 @@
 
 #include "../include/Liste.h"
 
-Liste allouerCellule(char * mot){
-
-	Liste cel;
-
-    if((cel = (Liste)malloc(sizeof(Cellule))) == NULL) {
-		return NULL;
-	}
-
-	if((cel->mot = (char *)malloc(sizeof(char) * MOTMAX)) == NULL) {
-		return NULL;
-	}
-
-	strcpy(cel->mot, mot);
-	cel->suivant = NULL;
-
-	return cel;
-
-}
-
 ArbreLexi allouer_noeud(char lettre){
 	ArbreLexi arbre;
 

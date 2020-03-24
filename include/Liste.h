@@ -20,15 +20,6 @@ typedef struct noeud{
 	struct noeud * fils;
 }NoeudLexi, * ArbreLexi;
 
-/*---------------------------------------------------------------------------*/
-/* BUT : Allouer une Cellule pour mot et sa position pos                     */
-/* PARAMETRES : *mot : mot à stocker                                         */
-/*              pos : position du mot à stocker                              */
-/* RETOUR : Adresse de la Cellule allouée, NULL si erreur                    */
-/* EFFET DE BORD : Alloue une Cellule                                        */
-/*---------------------------------------------------------------------------*/
-Liste allouerCellule(char * mot);
-
 ArbreLexi allouer_noeud(char lettre);
 
 #endif
