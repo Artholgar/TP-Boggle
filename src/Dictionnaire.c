@@ -29,34 +29,26 @@ void initialiseTableau(Liste tableHachage[]){
 	}
 }
 
-int rangeDansTableau(Liste tableHachage[], char * mot, int indice){
+void range_dans_arbre(ArbreLexi * arbre, const char * mot){
 
-	Liste tmp, ptr;
-
-    tmp = NULL;
-
-    if((tmp = allouerCellule(mot)) == NULL){
-        return 0;
-    }
-
-	/*La case du tableau ne contient pas de Cellule*/
-	if(tableHachage[indice] == NULL){
-		/*Insérer en première position*/
+	if((*arbre) == NULL){
 		
-		tableHachage[indice] = tmp;
+		(*arbre) = allouer_noeud(mot[0]);
 
-	/*La case du tableau contient au moins une cellule*/
+		if(mot[0] == '\0')
+			return ;
+
+		range_dans_arbre(&(*arbre)->fils, mot + 1);
+	}else if((*arbre)->lettre > mot[0]){
+		
+		range_dans_arbre(&(*arbre)->fg, mot);
+	}else if((*arbre)->lettre < mot[0]){
+
+		range_dans_arbre(&(*arbre)->fd, mot);
 	}else{
 
-        ptr = tableHachage[indice];
-
-        while(ptr->suivant != NULL){
-            ptr = ptr->suivant;
-        }
-
-        ptr->suivant = tmp;
+		range_dans_arbre(&(*arbre)->fils, mot + 1);
 	}
-	return 1;
 }
 
 int maj_a_min(int * c){
@@ -71,13 +63,11 @@ int maj_a_min(int * c){
     }
 }
 
-/*int rangeMots(Liste tableHachage[], char * source){
-	
+int range_mot(ArbreLexi * arbre, char * source){
 	FILE * fichier = NULL;
 	char * mot;
-	int c, i, indiceTableau;
+	int c, i;
 
-    indiceTableau = 0;
     i = 0;
 
 	if((mot= (char *)calloc(MOTMAX, sizeof(char))) == NULL) {
@@ -91,37 +81,33 @@ int maj_a_min(int * c){
 		return 0;
 	}
 
-	/*On lit chaque caractère du texte*
+	/*On lit chaque caractère du texte*/
 	c = fgetc(fichier);
 	while (c != EOF) {
 
-		/*Traitement d'un mot*
+		/*Traitement d'un mot*/
 		if (c != '\n' && c != '\r' && c != '\0' && i < MOTMAX) {
             if(maj_a_min(&c) == 0){
                 return 0;
             }
 			mot[i] = c;
 			i += 1;
-
 		}
-		/*Le mot est terminé, il est temps de le traiter. Nous vérifions que ce mot n'est pas vide.*
+		/*Le mot est terminé, il est temps de le traiter. Nous vérifions que ce mot n'est pas vide.*/
 		else if (((int)strlen(mot)) != 0) {
-			
 
-			/*Mise en place dans le tableau à l'aide de RangeDansTableau*
-
-			mot[i] = '\0'; /* On termine le mot correctement*
-			indiceTableau = hache(mot) % TAILLEHACH;
+			/*Mise en place dans le tableau à l'aide de Range_dans_arbre*/
 			
-			rangeDansTableau(tableHachage, mot, indiceTableau);
+			mot[i] = '\0'; /* On termine le mot correctement*/
 			
-			/*On réalloue la place pour passer au mot suivant*
+			range_dans_arbre(arbre, mot);
+			
+			/*On réalloue la place pour passer au mot suivant*/
 			if((mot = (char *)realloc(mot, MOTMAX * sizeof(char))) == NULL) {
 				return 0;
 			}
 			mot[0] = '\0';
 			i = 0;
-		
 		}
 		c = fgetc(fichier);
 	}
@@ -129,4 +115,22 @@ int maj_a_min(int * c){
 	
 	fclose(fichier);
 	return 1;
-}*/
+}
+
+void afficher_dico(ArbreLexi arbre){
+
+	if(arbre == NULL){
+		return ;
+	}
+
+	if(arbre->lettre == '\0'){
+		printf("\n");
+	}
+
+	
+
+	afficher_dico(arbre->fg);
+	printf("%c", arbre->lettre);
+	afficher_dico(arbre->fils);
+	afficher_dico(arbre->fd);
+}

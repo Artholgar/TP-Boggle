@@ -29,4 +29,6 @@ typedef struct noeud{
 /*---------------------------------------------------------------------------*/
 Liste allouerCellule(char * mot);
 
+ArbreLexi allouer_noeud(char lettre);
+
 #endif

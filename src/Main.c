@@ -11,24 +11,28 @@
 
 
 int main(int argc, char ** argv){
-    Liste lst, table_hach[TAILLEHACH];
-    int i;
+    ArbreLexi arbre;
+    char c;
 
-    lst = NULL;
+    arbre = NULL;
 
-    initialiseTableau(table_hach);
+    range_mot(&arbre, "Mots");
 
-    rangeMots(table_hach, "Mots");
+    /*range_dans_arbre(&arbre, "carabaff");
 
-    for(i = 0; i < TAILLEHACH; i++){
-        lst = table_hach[i];
-        while(lst != NULL){
-            printf("%s", lst->mot);
-            printf("\n");
-            lst = lst->suivant;
-        }
-        printf("---------------------------------------------\n");
-    }
+    range_dans_arbre(&arbre, "carapuce");
+
+    range_dans_arbre(&arbre, "tortank");
+
+    range_dans_arbre(&arbre, "autisme");
+
+    range_dans_arbre(&arbre, "catacombes");
+
+    range_dans_arbre(&arbre, "tortanks");*/
+    
+    afficher_dico(arbre);
+
+    
     
     return 0;
 }

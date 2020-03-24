@@ -30,8 +30,12 @@ Liste allouerCellule(char * mot){
 ArbreLexi allouer_noeud(char lettre){
 	ArbreLexi arbre;
 
+	arbre = (ArbreLexi)malloc(sizeof(NoeudLexi));
+
 	arbre->lettre = lettre;
 	arbre->fg = NULL;
 	arbre->fd = NULL;
 	arbre->fils = NULL;
+
+	return arbre;
 }

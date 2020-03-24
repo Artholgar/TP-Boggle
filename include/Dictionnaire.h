@@ -28,19 +28,7 @@ unsigned int hache(char *p);
 /*---------------------------------------------------------------------------*/
 void initialiseTableau(Liste tableHachage[]);
 
-/*---------------------------------------------------------------------------*/
-/* BUT : Ranger dans le tableau tableHachage un mot et sa position donnés en */
-/*       paramètres à l'aide de l'indice déterminé, le tout dans l'ordre     */
-/* PARAMETRES : tableHachage][] : Tableau de Listes des mots du texte        */
-/*              *mot : mot à stocker                                         */
-/*              indice : indice où l'on rangera la Cellule du mot (déterminé */
-/*                       à l'aide la fonction 'hache' plus haut)             */
-/*              pos : position, dans le texte, du mot à stocker              */
-/* RETOUR : Valeur entière. 0 si erreur, 1 sinon                             */
-/* EFFET DE BORD : Remplit le tableau tableHachage d'une nouvelle Cellule    */
-/*                 contenant mot et la (nouvelle) position                   */
-/*---------------------------------------------------------------------------*/
-int rangeDansTableau(Liste tableHachage[], char * mot, int indice);
+void range_dans_arbre(ArbreLexi * arbre, const char * mot);
 
 int maj_a_min(int * c);
 
@@ -53,6 +41,8 @@ int maj_a_min(int * c);
 /* EFFET DE BORD : Remplit le tableau tableHachage des Cellules des          */
 /*                 différents mots du texte                                  */
 /*---------------------------------------------------------------------------*/
-int rangeMots(Liste tableHachage[], char * source);
+int range_mot(ArbreLexi * arbre, char * source);
+
+void afficher_dico(ArbreLexi arbre);
 
 #endif
