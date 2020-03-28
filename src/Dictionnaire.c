@@ -42,7 +42,7 @@ int maj_a_min(int * c){
     }
 }
 
-int range_mot(ArbreLexi * arbre, char * source){
+int range_mot(ArbreLexi * arbre, const char * source){
 	FILE * fichier = NULL;
 	char * mot;
 	int c, i;
@@ -94,24 +94,6 @@ int range_mot(ArbreLexi * arbre, char * source){
 	
 	fclose(fichier);
 	return 1;
-}
-
-void afficher_dico(ArbreLexi arbre){
-
-	if(arbre == NULL){
-		return ;
-	}
-
-	if(arbre->lettre == '\0'){
-		printf("\n");
-	}
-
-	
-
-	afficher_dico(arbre->fg);
-	printf("%c", arbre->lettre);
-	afficher_dico(arbre->fils);
-	afficher_dico(arbre->fd);
 }
 
 int est_dans_arbre(ArbreLexi arbre, char * mot){

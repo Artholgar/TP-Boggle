@@ -6,30 +6,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../include/Liste.h"
+#include "../include/Arbre.h"
 #include "../include/Dictionnaire.h"
+#include "../include/Test.h"
 
 
 int main(int argc, char ** argv){
-    ArbreLexi arbre;
-
-    arbre = NULL;
-
-    range_mot(&arbre, "Mots");
-
-    /*range_dans_arbre(&arbre, "carabaff");
-
-    range_dans_arbre(&arbre, "carapuce");
-
-    range_dans_arbre(&arbre, "tortank");
-
-    range_dans_arbre(&arbre, "autisme");
-
-    range_dans_arbre(&arbre, "catacombes");
-
-    range_dans_arbre(&arbre, "tortanks");*/
-    
-    printf("%d\n", est_dans_arbre(arbre, "dab"));
+    if(!test()){
+        fprintf(stderr, "erreur");
+    }
 
     
     

@@ -2,16 +2,18 @@ CC=gcc
 EXEC=Boggle
 CFLAGS=-ansi -Wall -pedantic
 LDFLAGS=
-OBJ=./Main.o ./Liste.o ./Dictionnaire.o
+OBJ=./Main.o ./Arbre.o ./Dictionnaire.o ./Test.o
 
 $(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-./Main.o: ./include/Liste.h ./include/Dictionnaire.h
+./Main.o: ./include/Arbre.h ./include/Dictionnaire.h ./include/Test.h
 
-./Liste.o: ./include/Liste.h
+./Arbre.o: ./include/Arbre.h
 
-./Dictionnaire.o: ./include/Dictionnaire.h ./include/Liste.h
+./Dictionnaire.o: ./include/Dictionnaire.h ./include/Arbre.h
+
+./Test.o: ./include/Arbre.h ./include/Dictionnaire.h
 
 ./%.o: ./src/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
