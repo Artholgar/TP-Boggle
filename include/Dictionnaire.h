@@ -6,27 +6,9 @@
 #ifndef __DICO__
 #define __DICO__
 
-#include "Liste.h"
+#include "Arbre.h"
 
 #define TAILLEHACH 1000
-
-/*---------------------------------------------------------------------------*/
-/* BUT : Renvoyer une valeur entière propre à un mot p passé en paramètres   */
-/*       afin de pouvoir déterminer l'indice pour ranger la Cellule du mot   */
-/*       dans un tableau de Listes                                           */
-/* PARAMETRES : *p : mot à hacher                                            */
-/* RETOUR : Valeur entière unique pour chaque mot                            */
-/* EFFET DE BORD : Modifie la valeur d'une variable entière                  */
-/*---------------------------------------------------------------------------*/
-unsigned int hache(char *p);
-
-/*---------------------------------------------------------------------------*/
-/* BUT : Initialiser toutes les cases du tableau à NULL                      */
-/* PARAMETRES : tableHachage][] : Tableau de Listes des mots du texte        */
-/* RETOUR : Aucun                                                            */
-/* EFFET DE BORD : Change toutes les valeurs du tableau en NULL              */
-/*---------------------------------------------------------------------------*/
-void initialiseTableau(Liste tableHachage[]);
 
 void range_dans_arbre(ArbreLexi * arbre, const char * mot);
 
@@ -41,9 +23,7 @@ int maj_a_min(int * c);
 /* EFFET DE BORD : Remplit le tableau tableHachage des Cellules des          */
 /*                 différents mots du texte                                  */
 /*---------------------------------------------------------------------------*/
-int range_mot(ArbreLexi * arbre, char * source);
-
-void afficher_dico(ArbreLexi arbre);
+int range_mot(ArbreLexi * arbre, const char * source);
 
 int est_dans_arbre(ArbreLexi arbre, char * mot);
 

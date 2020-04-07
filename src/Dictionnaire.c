@@ -8,20 +8,37 @@
 
 #include "../include/Dictionnaire.h"
 
+int maj_a_min(int * c){
+
+    if((*c) <= 122 && (*c) >= 97){
+        return 1;
+    }else if((*c) <= 90 && (*c) >= 65){
+        (*c) += 32;
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
 void range_dans_arbre(ArbreLexi * arbre, const char * mot){
+	int c;
+
+	c = mot[0];
+
+	maj_a_min(&c);
 
 	if((*arbre) == NULL){
 		
-		(*arbre) = allouer_noeud(mot[0]);
+		(*arbre) = allouer_noeud(c);
 
 		if(mot[0] == '\0')
 			return ;
 
 		range_dans_arbre(&(*arbre)->fils, mot + 1);
-	}else if((*arbre)->lettre > mot[0]){
+	}else if((*arbre)->lettre > c){
 		
 		range_dans_arbre(&(*arbre)->fg, mot);
-	}else if((*arbre)->lettre < mot[0]){
+	}else if((*arbre)->lettre < c){
 
 		range_dans_arbre(&(*arbre)->fd, mot);
 	}else{
@@ -30,20 +47,8 @@ void range_dans_arbre(ArbreLexi * arbre, const char * mot){
 	}
 }
 
-int maj_a_min(int * c){
-
-    if((*c) <= 122 && (*c) >= 97){
-        return 1;
-    }else if((*c) <= 90 && (*c) >= 65){
-        (*c) -= 32;
-        return 1;
-    }else{
-        return 0;
-    }
-}
-
-int range_mot(ArbreLexi * arbre, char * source){
-	FILE * fichier = NULL;
+int range_mot(ArbreLexi * arbre, const char * source){
+	FILE * fichier;
 	char * mot;
 	int c, i;
 
@@ -96,25 +101,8 @@ int range_mot(ArbreLexi * arbre, char * source){
 	return 1;
 }
 
-void afficher_dico(ArbreLexi arbre){
-
-	if(arbre == NULL){
-		return ;
-	}
-
-	if(arbre->lettre == '\0'){
-		printf("\n");
-	}
-
-	
-
-	afficher_dico(arbre->fg);
-	printf("%c", arbre->lettre);
-	afficher_dico(arbre->fils);
-	afficher_dico(arbre->fd);
-}
-
 int est_dans_arbre(ArbreLexi arbre, char * mot){
+	int c;
 
 	if(arbre == NULL){
 		return 0;
@@ -127,9 +115,13 @@ int est_dans_arbre(ArbreLexi arbre, char * mot){
 		return 0;
 	}
 
-	if(arbre->lettre > mot[0]){
+	c = (int)mot[0];
+
+	maj_a_min(&c);
+
+	if(arbre->lettre > c){
 		return est_dans_arbre(arbre->fg, mot);
-	}else if(arbre->lettre < mot[0]){
+	}else if(arbre->lettre < c){
 		return est_dans_arbre(arbre->fd, mot);
 	}else{
 		return est_dans_arbre(arbre->fils, mot + 1);

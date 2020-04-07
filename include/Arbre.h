@@ -8,11 +8,6 @@
 
 #define MOTMAX 50
 
-typedef struct cellule{
-	char * mot;
-	struct cellule *suivant;
-}Cellule, *Liste; /* pour les listes chainees de mots*/
-
 typedef struct noeud{
 	char lettre;
 	struct noeud * fg;

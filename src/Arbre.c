@@ -6,12 +6,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/Liste.h"
+#include "../include/Arbre.h"
 
 ArbreLexi allouer_noeud(char lettre){
 	ArbreLexi arbre;
 
-	arbre = (ArbreLexi)malloc(sizeof(NoeudLexi));
+	if(NULL == (arbre = (ArbreLexi)malloc(sizeof(NoeudLexi)))){
+		return NULL;
+	}
 
 	arbre->lettre = lettre;
 	arbre->fg = NULL;
