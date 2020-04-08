@@ -10,21 +10,32 @@
 
 #define TAILLEHACH 1000
 
+/*PARAMETRES : ArbreLexi * arbre, const char * mot
+ *RETOURS : aucun
+ *EFFET DE BORD : modifie arbre
+ *DESCRIPTION : Cette fonction ajoute un mot à l'arbre lexicographique arbre.
+ */
 void range_dans_arbre(ArbreLexi * arbre, const char * mot);
 
+/*PARAMETRES : int * c
+ *RETOURS : code d'erreur
+ *EFFET DE BORD : modifie c
+ *DESCRIPTION : Cette fonction modifie la lettre c, si c'est une majuscule, en la meme lettre mais minuscule.
+ */
 int maj_a_min(int * c);
 
-/*---------------------------------------------------------------------------*/
-/* BUT : Traiter et ranger tous les mots du fichier dont le nom est passé en */
-/*       paramètres dans un tableau de Listes                                */
-/* PARAMETRES : tableHachage][] : Tableau de Listes des mots du texte        */
-/*              *source : nom du fichier à traiter                           */
-/* RETOUR : Valeur entière. 0 si erreur, 1 sinon                             */
-/* EFFET DE BORD : Remplit le tableau tableHachage des Cellules des          */
-/*                 différents mots du texte                                  */
-/*---------------------------------------------------------------------------*/
+/*PARAMETRES : ArbreLexi * arbre, const char * source
+ *RETOURS : code d'erreur
+ *EFFET DE BORD : modifie arbre
+ *DESCRIPTION : Cette fonction ajoute tous les mots du fichier source à l'arbre lexicographique arbre.
+ */
 int range_mot(ArbreLexi * arbre, const char * source);
 
+/*PARAMETRES : ArbreLexi arbre, char * mot
+ *RETOURS : int
+ *EFFET DE BORD : aucun
+ *DESCRIPTION : Cette fonction renvoie 1 si mot apartient à arbre, 0 sinon.
+ */
 int est_dans_arbre(ArbreLexi arbre, char * mot);
 
 #endif
