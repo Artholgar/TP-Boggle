@@ -2,7 +2,7 @@
 
 #include "../include/Test.h"
 
-/*int test_allouer_noeud(){
+int test_allouer_noeud(){
     ArbreLexi arbre_test;
 
     arbre_test = NULL;
@@ -14,10 +14,17 @@
         return 0;
     }
 
+	arbre_test = allouer_noeud('z');
+
+    if(NULL == arbre_test || arbre_test->lettre != 'z' || NULL != arbre_test->fg || NULL != arbre_test->fils || NULL != arbre_test->fd){
+        fprintf(stderr, "ERREUR : allouer_noeud test 2\n");
+        return 0;
+    }
+
     arbre_test = allouer_noeud('\0');
 
     if(NULL == arbre_test || arbre_test->lettre != '\0' || NULL != arbre_test->fg || NULL != arbre_test->fils || NULL != arbre_test->fd){
-        fprintf(stderr, "ERREUR : allouer_noeud test 2\n");
+        fprintf(stderr, "ERREUR : allouer_noeud test 3\n");
         return 0;
     }
 
@@ -60,67 +67,88 @@ int test_range_dans_arbre(){
     return 1;
 }
 
-int test_lettre_aleatoire(){
-	int count[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	char c;
+int test_genere_grille(){
+	Cellule **tab;
+	int i, j, largeur, hauteur;
+
+	largeur = 4;
+
+	hauteur = 4;
 	
-	int i = 100000;
-	
-	srand(time(NULL));
-	
-	while (i--) {
-		printf("%c",c = lettre_aleatoire());
-		count[c - 'A']++;
+	if (!genere_grille(&tab, largeur, hauteur)) {
+		return 0;
 	}
-	printf("\n");
 	
-	for (i = 0; i < 26; i++)
-		printf("%c : %5d, %#5.2f %% \n",(char)'A' + i, count[i], count[i] / 1000.0);
-		
+	for(j = 0; j < hauteur; j++){
+		for(i = 0; i < largeur; i++){
+			if (tab[j][i].lettre < 65 || tab[j][i].lettre > 90 || tab[j][i].etat < 0 || tab[j][i].etat > 1) {
+				fprintf(stderr, "ERREUR : genere_grille test 1\n");
+				return 0;
+			}
+		}
+			
+	}
+
+	largeur = 8;
+
+	hauteur = 4;
+	
+	if (!genere_grille(&tab, largeur, hauteur)) {
+		return 0;
+	}
+	
+	for(j = 0; j < hauteur; j++){
+		for(i = 0; i < largeur; i++){
+			if (tab[j][i].lettre < 65 || tab[j][i].lettre > 90 || tab[j][i].etat < 0 || tab[j][i].etat > 1) {
+				fprintf(stderr, "ERREUR : genere_grille test 2\n");
+				return 0;
+			}
+		}
+			
+	}
+
+	largeur = 4;
+
+	hauteur = 8;
+	
+	if (!genere_grille(&tab, largeur, hauteur)) {
+		return 0;
+	}
+	
+	for(j = 0; j < hauteur; j++){
+		for(i = 0; i < largeur; i++){
+			if (tab[j][i].lettre < 65 || tab[j][i].lettre > 90 || tab[j][i].etat < 0 || tab[j][i].etat > 1) {
+				fprintf(stderr, "ERREUR : genere_grille test 3\n");
+				return 0;
+			}
+		}
+			
+	}
+
+	largeur = 0;
+
+	hauteur = 0;
+	
+	if (!genere_grille(&tab, largeur, hauteur)) {
+		return 0;
+	}
+	
+	for(j = 0; j < hauteur; j++){
+		for(i = 0; i < largeur; i++){
+			if (tab[j][i].lettre < 65 || tab[j][i].lettre > 90 || tab[j][i].etat < 0 || tab[j][i].etat > 1) {
+				fprintf(stderr, "ERREUR : genere_grille test 4\n");
+				return 0;
+			}
+		}
+			
+	}
 	return 1;
+
 }
-
-int test_genere_grille(int largeur, int hauteur){
-	char **tab;
-	int i, j;
-	
-	tab = genere_grille(largeur, hauteur);
-	
-	if(tab){
-		for(j = 0; j < hauteur; j++){
-			for(i = 0; i < largeur; i++)
-				printf("%c", tab[j][i]);
-			printf("\n");
-		}
-		return 1;
-	}
-	
-	return 0;
-}
-
-int test_genere_etat_grille(int largeur, int hauteur){
-	int **etat;
-	int i, j;
-	
-	etat = genere_etat_grille(largeur, hauteur);
-	
-	if(etat){
-		for(j = 0; j < hauteur; j++){
-			for(i = 0; i < largeur; i++)
-				printf("%c", etat[j][i]);
-			printf("\n");
-		}
-		return 1;
-	}
-	
-	return 0;
-}
-
-
 
 int test(){
-	if(test_allouer_noeud && test_range_dans_arbre && test_lettre_aleatoire && test_genere_grille(4, 4) && test_genere_etat_grille(4, 4))
+	if(test_allouer_noeud() && test_range_dans_arbre() && test_genere_grille())
 		return 1;
 	return 0;
-}*/
+}
 

@@ -9,6 +9,7 @@
 #define Evenements_h
 
 #include <stdio.h>
+#include <assert.h>
 #include <ncurses.h>
 #include <string.h>
 #include <math.h>

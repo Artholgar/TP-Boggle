@@ -18,19 +18,29 @@ void init_affichage(){
 	
 	start_color();
 	
-	init_color(COLOR_DARK_GREY, 120, 120, 120);
-	init_color(COLOR_LIGHT_GREY, 158, 158, 158);
-	
 	init_pair(1, COLOR_WHITE, COLOR_CYAN);
 	init_pair(2, COLOR_WHITE, COLOR_BLUE);
 }
 
 
-void affiche_lettre(int largeur, int hauteur, int abscisse, int ordonnee, int couleur, Jeu partie, int i, int j){
+void affiche_lettre(int largeurC, int hauteurC, int couleur, Jeu partie, int i, int j){
 	int x, y;
 	int n, m;
+	int ordonnee, abscisse;
+
+	assert(partie.largeur > 0);
+	assert(partie.hauteur > 0);
+	assert(largeurC >= 0);
+	assert(hauteurC >= 0);
+	assert(i >= 0);
+	assert(j >= 0);
+	assert(i < partie.largeur);
+	assert(j < partie.hauteur);
 
 	n = 0;
+
+	ordonnee = hauteurC * j;
+	abscisse = largeurC * i;
 	
 	attron(COLOR_PAIR(couleur));
 	
@@ -40,11 +50,11 @@ void affiche_lettre(int largeur, int hauteur, int abscisse, int ordonnee, int co
 	if(partie.pos.i == i && partie.pos.j == j)
 		attron(A_BLINK);
 	
-	for(y = ordonnee; y < ordonnee + hauteur; y++){
+	for(y = ordonnee; y < ordonnee + hauteurC; y++){
 		m = 0;
 		n++;
-		for(x = abscisse; x < abscisse + largeur; x++){
-			if(m == largeur / 2 && n == hauteur / 2 + 1)
+		for(x = abscisse; x < abscisse + largeurC; x++){
+			if(m == largeurC / 2 && n == hauteurC / 2 + 1)
 				mvprintw(y, x, "%c", partie.grille[j][i].lettre);
 			else
 				mvprintw(y, x, " ");
@@ -59,10 +69,13 @@ void affiche_lettre(int largeur, int hauteur, int abscisse, int ordonnee, int co
 
 void affiche_grille(Jeu partie, int largeurC, int hauteurC){
 	int i, j;
+
+	assert(largeurC > 0);
+	assert(hauteurC > 0);
 	
 	for(j = 0; j < partie.hauteur ; j++)
 		for( i = 0; i < partie.largeur; i++)
-			affiche_lettre(largeurC, hauteurC, i * largeurC, j * hauteurC, (i + j) % 2 + 1, partie, i, j);
+			affiche_lettre(largeurC, hauteurC, (i + j) % 2 + 1, partie, i, j);
 }
 
 void affiche_score_et_vie(int score, int vie, int largeur_quadrillage, int taille_case_largeur){

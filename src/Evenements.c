@@ -17,6 +17,7 @@ void reset_etat(Cellule ** grille, int largeur_quadrillage, int hauteur_quadrill
 
 
 int case_valide(int y, int x, int y_prec, int x_prec){
+
 	if(y <= y_prec + 1 && y >= y_prec - 1)
 		if(x <= x_prec + 1 && x >= x_prec - 1)
 			return 1;
@@ -27,6 +28,12 @@ int case_valide(int y, int x, int y_prec, int x_prec){
 void ajoute_caractere(Jeu * partie){
 	int longeur;
 
+	assert((*partie).grille != NULL);
+	assert((*partie).pos.j >= 0);
+	assert((*partie).pos.i >= 0);
+	assert((*partie).pos.j < (*partie).hauteur);
+	assert((*partie).pos.i < (*partie).largeur);
+
 	longeur = strlen((*partie).mot_actuel);
 
 	(*partie).mot_actuel[longeur] = (*partie).grille[(*partie).pos.j][(*partie).pos.i].lettre;
@@ -35,6 +42,8 @@ void ajoute_caractere(Jeu * partie){
 
 void actualise_score(Jeu * partie){
 	int taille_mot;
+
+	assert((*partie).score >= 0);
 	
 	taille_mot = strlen((*partie).mot_actuel);
 	

@@ -117,7 +117,9 @@ int est_dans_arbre(ArbreLexi arbre, char * mot){
 
 	c = (int)mot[0];
 
-	maj_a_min(&c);
+	if(!maj_a_min(&c)){
+		return 0;
+	}
 
 	if(arbre->lettre > c){
 		return est_dans_arbre(arbre->fg, mot);

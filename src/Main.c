@@ -27,6 +27,7 @@ int main(int argc, const char * argv[]){
 	partie.vie = 4;
 	partie.dico = NULL;
 	partie.mots = NULL;
+	partie.grille = NULL;
 	partie.pos.j = 0;
 	partie.pos.i = 0;
 	partie.pos.j_precedent = -1;
@@ -35,6 +36,10 @@ int main(int argc, const char * argv[]){
 
 	largeur_case = 7;
 	hauteur_case = 3;
+
+	if(!test()) {
+		exit(EXIT_FAILURE);
+	}
 	
 	srand((unsigned)(time(NULL)));
 	if(range_mot(&(partie.dico), "./Mots") == 0)
@@ -47,7 +52,7 @@ int main(int argc, const char * argv[]){
 		exit(EXIT_FAILURE);
 
 	do {
-		affiche_grille(partie , largeur_case, hauteur_case);
+		affiche_grille(partie, largeur_case, hauteur_case);
 		
 		affiche_score_et_vie(partie.score, partie.vie, partie.largeur, largeur_case);
 		
