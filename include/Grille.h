@@ -31,4 +31,11 @@ char lettre_aleatoire(void);
  */
 int genere_grille (Cellule *** grille, int largeur, int hauteur) ;
 
+/*PARAMETRES : Cellule ** grille, int largeur_quadrillage, int hauteur_quadrillage
+ *RETOURS : aucun
+ *EFFET DE BORD : modifie grille
+ *DESCRIPTION : Cette fonction remet à 0 tous les attributs etat des Cellule dans le tableau à deux dimantions grille.
+ */
+void reset_etat(Cellule ** grille, int largeur_quadrillage, int hauteur_quadrillage);
+
 #endif

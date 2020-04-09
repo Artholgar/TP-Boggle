@@ -36,13 +36,6 @@ typedef struct jeu{
 	Curseur pos;
 }Jeu;
 
-/*PARAMETRES : Cellule ** grille, int largeur_quadrillage, int hauteur_quadrillage
- *RETOURS : aucun
- *EFFET DE BORD : modifie grille
- *DESCRIPTION : Cette fonction remet à 0 tous les attributs etat des Cellule dans le tableau à deux dimantions grille.
- */
-void reset_etat(Cellule ** grille, int largeur_quadrillage, int hauteur_quadrillage);
-
 /*PARAMETRES : int y, int x, int y_prec, int x_prec
  *RETOURS : int
  *EFFET DE BORD : aucun

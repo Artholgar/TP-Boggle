@@ -40,5 +40,3 @@ uninstall: mrproper
 	rm -f ./bin/$(EXEC)
 	rm -f ./bin/*.o
 	rm -rf ./bin
-
-exec: $(EXEC)

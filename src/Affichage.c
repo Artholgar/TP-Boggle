@@ -7,7 +7,6 @@
 
 #include "../include/Affichage.h"
 
-
 void init_affichage(){
 	initscr();
 	cbreak();
@@ -21,7 +20,6 @@ void init_affichage(){
 	init_pair(1, COLOR_WHITE, COLOR_CYAN);
 	init_pair(2, COLOR_WHITE, COLOR_BLUE);
 }
-
 
 void affiche_lettre(int largeurC, int hauteurC, int couleur, Jeu partie, int i, int j){
 	int x, y;
@@ -65,7 +63,6 @@ void affiche_lettre(int largeurC, int hauteurC, int couleur, Jeu partie, int i, 
 	
 	attroff(COLOR_PAIR(couleur) | A_STANDOUT | A_BLINK);
 }
-
 
 void affiche_grille(Jeu partie, int largeurC, int hauteurC){
 	int i, j;

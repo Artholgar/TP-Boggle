@@ -8,14 +8,6 @@
 
 #include "../include/Evenements.h"
 
-void reset_etat(Cellule ** grille, int largeur_quadrillage, int hauteur_quadrillage){
-	int j, i;
-	for(j = 0; j < hauteur_quadrillage; j++)
-		for(i = 0; i < largeur_quadrillage; i++)
-			grille[j][i].etat = 0;
-}
-
-
 int case_valide(int y, int x, int y_prec, int x_prec){
 
 	if(y <= y_prec + 1 && y >= y_prec - 1)
@@ -23,7 +15,6 @@ int case_valide(int y, int x, int y_prec, int x_prec){
 			return 1;
 	return 0;
 }
-
 
 void ajoute_caractere(Jeu * partie){
 	int longeur;
@@ -104,6 +95,9 @@ void gestion_ev(Jeu * partie, int ev){
 					range_dans_arbre(&((*partie).mots), (*partie).mot_actuel);
 					
 					actualise_score(partie);
+				}
+				else {
+					(*partie).vie--;
 				}
 			}
 			

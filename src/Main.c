@@ -18,11 +18,12 @@
 int main(int argc, const char * argv[]){
 	int largeur_case, hauteur_case;
 	int touche;
+	int ligne;
 
 	Jeu partie;
 
-	partie.largeur = 10;
-	partie.hauteur = 10;
+	partie.largeur = 4;
+	partie.hauteur = 4;
 	partie.score = 0;
 	partie.vie = 4;
 	partie.dico = NULL;
@@ -47,6 +48,74 @@ int main(int argc, const char * argv[]){
 			exit(EXIT_FAILURE);		
 	
 	init_affichage();
+
+	ligne = 0;
+
+	attron(A_BOLD);
+	mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+	attroff(A_BOLD);
+	mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+	
+	do {
+
+		touche = getch();
+
+		switch (touche) {
+			case KEY_UP:
+				if(ligne > 0)
+					ligne--;
+				attron(A_BOLD);
+				mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+				attroff(A_BOLD);
+				mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+				break;
+				
+			case KEY_DOWN:
+				if(ligne < 1)
+					ligne++;
+				mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+				attron(A_BOLD);
+				mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+				attroff(A_BOLD);
+				break;
+				
+			case KEY_LEFT:
+				if (ligne == 0 && partie.largeur > 2){
+					partie.largeur--;
+					attron(A_BOLD);
+					mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+					attroff(A_BOLD);
+					mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+				}
+				else if (ligne == 1 && partie.hauteur > 2 ){
+					partie.hauteur--;
+					mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+					attron(A_BOLD);
+					mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+					attroff(A_BOLD);
+				}
+				break;
+				
+			case KEY_RIGHT:
+				if (ligne == 0 && partie.largeur < (COLS - 28) / largeur_case){
+					partie.largeur++;
+					attron(A_BOLD);
+					mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+					attroff(A_BOLD);
+					mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+				}
+				else if (ligne == 1 && partie.hauteur < LINES / hauteur_case){
+					partie.hauteur++;
+					mvprintw(0, 0, "Largeur : %d  ", partie.largeur);
+					attron(A_BOLD);
+					mvprintw(1, 0, "Hauteur : %d  ", partie.hauteur);
+					attroff(A_BOLD);
+				}
+				break;
+		}
+		refresh();
+
+	} while(touche != '\n') ;
 	
 	if (genere_grille(&(partie.grille), partie.largeur, partie.hauteur) == 0) 
 		exit(EXIT_FAILURE);
